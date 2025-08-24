@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) return new ArrayList<>();
+
+        // Map to store sorted string as key, and list of anagrams as value
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String s : strs) {
+            // Sort the string to get a unique key
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+
+            // Add to hashmap
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(s);
+        }
+
+        // Return all values (groups of anagrams)
+        return new ArrayList<>(map.values());
+    }
+
+    // Driver main
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+
+        String[] input1 = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        System.out.println(sol.groupAnagrams(input1));
+
+        String[] input2 = {""};
+        System.out.println(sol.groupAnagrams(input2));
+
+        String[] input3 = {"a"};
+        System.out.println(sol.groupAnagrams(input3));
+
+        String[] input4 = {"abc", "bca", "cab", "xyz", "zyx", "yxz"};
+        System.out.println(sol.groupAnagrams(input4));
+
+        String[] input5 = {"a
